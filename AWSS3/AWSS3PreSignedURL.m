@@ -370,13 +370,7 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
         
         
         int32_t expireDuration = [expires timeIntervalSinceNow];
-        if (expireDuration > 604800) {
-            return [AWSTask taskWithError:[NSError errorWithDomain:AWSS3PresignedURLErrorDomain
-                                                              code:AWSS3PresignedURLErrorInvalidExpiresDate
-                                                          userInfo:@{NSLocalizedDescriptionKey: @"Invalid ExpiresDate, must be less than seven days in future"}]
-                    ];
-            
-        }
+        
         NSString *generatedQueryString = [self generateQueryStringForSignatureV4WithBucketName:bucketName
                                                                                        keyName:keyName
                                                                            credentialsProvider:credentialsProvider
